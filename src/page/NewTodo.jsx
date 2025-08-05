@@ -48,6 +48,7 @@ function NewTodo() {
       title: title,
       id: random,
       description: description,
+      chek:false
     };
 
     let result = localStorage.getItem("todos");

@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 function Home() {
   let [data, setData] = useState(JSON.parse(localStorage.getItem("todos")));
-  let [modalka,setModalka]=useState(false)
+  let [modalka, setModalka] = useState(false);
   let navigate = useNavigate();
   let timeoutRef = useRef(null);
   let date = new Date();
@@ -30,14 +30,30 @@ function Home() {
   function modal() {
     timeoutRef.current = setInterval(() => {
       setModalka(true);
-    }, 1000); 
+    }, 1000);
   }
 
+  function deleted() {
+    data.map((value, index) => {
+      if (value.chek) {
+        data.splice(index, 1);
+        localStorage.setItem("todos", JSON.stringify(data));
+        setModalka(false);
+      }
+    });
+  }
   function clear() {
     clearInterval(timeoutRef.current);
   }
   function cancel() {
     setModalka(false);
+  }
+  function chek(e, value) {
+    data.map((item) => {
+      if (e.target.checked && item.id === value.id) {
+        item.chek = true;
+      }
+    });
   }
   return (
     <div className="mx-auto container font-mono bg-black h-[100vh] relative text-white p-5">
@@ -90,6 +106,10 @@ function Home() {
                   <div className="">
                     <input
                       type="checkbox"
+                      value={value.chek}
+                      onChange={(e) => {
+                        chek(e, value);
+                      }}
                       className="absolute right-5 bottom-5 w-5 h-5"
                     />
                   </div>
@@ -127,7 +147,7 @@ function Home() {
               <i className="fa-solid fa-clipboard text-xl"></i>
               <p className="text-sm">test</p>
             </div>
-            <div className="flex flex-col items-center">
+            <div onClick={deleted} className="flex flex-col items-center">
               <i className="fa-solid fa-trash-can text-xl"></i>
               <p className="text-sm">O'chirish</p>
             </div>
