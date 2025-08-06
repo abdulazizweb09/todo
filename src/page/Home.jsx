@@ -24,6 +24,7 @@ function Home() {
     "Noyabr",
     "Dekabr",
   ];
+  const selectedCount = data?.filter((item) => item.chek).length;
   function to() {
     navigate("/new");
   }
@@ -34,13 +35,13 @@ function Home() {
   }
 
   function deleted() {
-    data.map((value, index) => {
-      if (value.chek) {
-        data.splice(index, 1);
-        localStorage.setItem("todos", JSON.stringify(data));
-        setModalka(false);
-      }
-    });
+    let tek = confirm("rostanham ochirmoqchimisisz");
+    if (tek) {
+      let cleared = data.filter((item) => !item.chek);
+      localStorage.setItem("todos", JSON.stringify(cleared));
+      setModalka(false);
+      window.location.reload();
+    }
   }
   function clear() {
     clearInterval(timeoutRef.current);
@@ -55,6 +56,12 @@ function Home() {
       }
     });
   }
+  function toNewTodo(id) {
+    if (modalka) {
+      return;
+    }
+    navigate(`/details/${id}`);
+  }
   return (
     <div className="mx-auto container font-mono bg-black h-[100vh] relative text-white p-5">
       <div className="fixed top-10">
@@ -67,11 +74,13 @@ function Home() {
             <i className="fa-solid fa-list-check"></i>
           </div>
           <div>
-            <p className="ml-5 text-2xl -mt-1">0 ta element tanlangan</p>
+            <p className="ml-5 text-2xl -mt-1">
+              {selectedCount} ta element tanlangan
+            </p>
           </div>
         </div>
       )}
-      <div className="flex flex-wrap gap-15 pt-20">
+      <div className="flex flex-wrap gap-15 pt-20 items-start">
         {/* <div className="w-[40%] rounded-xl bg-[#212121] p-5">
           <h3>oqqand 1 kg</h3>
           <p className="text-neutral-400 text-[14px] w-30 mt-5 mb-5">
@@ -86,6 +95,9 @@ function Home() {
           data.map((value) => {
             return (
               <div
+                onClick={(e) => {
+                  toNewTodo(value.id);
+                }}
                 key={value.id}
                 onTouchStart={modal}
                 onTouchEnd={clear}
@@ -99,7 +111,7 @@ function Home() {
                   {value.description}
                 </p>
                 <p>
-                  {`${month} `}
+                  {`${month - 1} `}
                   {months[month]}
                 </p>
                 {modalka && (

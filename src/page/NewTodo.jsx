@@ -7,6 +7,7 @@ function NewTodo() {
   let [description, setDescription] = useState("");
   let random = Math.trunc(Math.random() * 1000000);
   let navigate = useNavigate();
+  
 
   let date = new Date();
   let month = date.getMonth();
@@ -76,7 +77,7 @@ function NewTodo() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <p className="text-[12px] text-neutral-300">{`${dey}-${months[month]} | 0 ta belgi`}</p>
+        <p className="text-[12px] text-neutral-300">{`${dey}-${months[month]} | ${description.length} ta belgi`}</p>
         <input
           type="text"
           className="border-0 w-full p-1 outline-0"
