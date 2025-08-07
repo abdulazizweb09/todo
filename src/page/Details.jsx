@@ -63,20 +63,19 @@ function Details() {
       description: description,
       chek: false,
     };
-       
-   let updated = data.map((item) => {
-     if (item.id == id) {
-       return {
-         ...item,
-         title: title,
-         description: description,
-       };
-     }
-     return item;
-   });
 
-   localStorage.setItem("todos", JSON.stringify(updated));
+    let updated = data.map((item) => {
+      if (item.id == id) {
+        return {
+          ...item,
+          title: title,
+          description: description,
+        };
+      }
+      return item;
+    });
 
+    localStorage.setItem("todos", JSON.stringify(updated));
 
     toast.success("Todo saqlandi !");
     navigate("/");
