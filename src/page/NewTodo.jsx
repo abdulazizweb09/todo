@@ -77,7 +77,7 @@ function NewTodo() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <p className="text-[12px] text-neutral-300">{`${dey}-${months[month]} | ${description.length} ta belgi`}</p>
+        <p className="text-[12px] mt-5 mb-5 text-neutral-300">{`${dey}-${months[month]} | ${description.length} ta belgi`}</p>
         <input
           type="text"
           className="border-0 w-full p-1 outline-0"

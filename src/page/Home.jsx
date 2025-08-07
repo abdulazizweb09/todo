@@ -145,7 +145,7 @@ function Home() {
         </div>
         <div className="flex flex-col items-center">
           <i className="fa-solid fa-list-check text-xl"></i>
-          <p className="text-sm">Vazifalar</p>
+          <p className="text-sm">Test</p>
         </div>
       </div>
       {modalka && (
